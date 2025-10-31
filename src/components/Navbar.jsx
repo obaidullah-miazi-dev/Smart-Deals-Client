@@ -6,7 +6,18 @@ import { AuthContext } from '../Provider/AuthProvider';
 
 
 const Navbar = () => {
-    const { user } = use(AuthContext)
+    const { user,logOut } = use(AuthContext)
+
+    const handleLogOut = ()=>{
+        logOut()
+        .then(res=>{
+            console.log(res)
+            alert('loged out successfully')
+        })
+        .catch(err =>{
+            console.log(err);
+        })
+    }
 
     const Links = <>
         <NavLink to='/'
@@ -71,9 +82,9 @@ const Navbar = () => {
                         {
                             user ?
                                 
-                                    <button className="px-5 py-2.5 hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Log Out</button>
+                                    <button onClick={handleLogOut} className="px-5 py-2.5 hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Log Out</button>
                                  :
-                                <div>
+                                <div className='flex gap-3 items-center'>
                                     <Link to='/login'>
                                         <button className="px-5 py-2.5 hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Login</button>
                                     </Link>
