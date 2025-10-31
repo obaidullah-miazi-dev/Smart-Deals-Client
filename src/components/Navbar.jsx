@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import Container from './Container';
 import { Link, NavLink } from 'react-router';
 import { Menu, X } from 'lucide-react';
+import { AuthContext } from '../Provider/AuthProvider';
 
 
 const Navbar = () => {
+    const { user } = use(AuthContext)
 
     const Links = <>
         <NavLink to='/'
@@ -66,12 +68,20 @@ const Navbar = () => {
 
                     {/* button  */}
                     <div className="hidden md:flex items-center gap-4">
-                        <Link to='/login'>
-                            <button className="px-5 py-2.5 hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Login</button>
-                        </Link>
-                        <Link to='/register'>
-                            <button className="px-5 py-2.5 hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Register</button>
-                        </Link>
+                        {
+                            user ?
+                                
+                                    <button className="px-5 py-2.5 hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Log Out</button>
+                                 :
+                                <div>
+                                    <Link to='/login'>
+                                        <button className="px-5 py-2.5 hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Login</button>
+                                    </Link>
+                                    <Link to='/register'>
+                                        <button className="px-5 py-2.5 hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Register</button>
+                                    </Link>
+                                </div>
+                        }
                     </div>
 
                     <button

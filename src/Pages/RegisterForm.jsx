@@ -1,6 +1,19 @@
+import { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../Provider/AuthProvider";
 
 export default function RegisterForm() {
+    const {googleLogIn} = use(AuthContext)
+
+    const handleGoogleSignUp = ()=>{
+        googleLogIn()
+        .then(res =>{
+            console.log(res.user)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
 
 
   
@@ -13,9 +26,9 @@ export default function RegisterForm() {
         <p className="text-center text-sm text-gray-600 mb-6">
           Already have an account?{' '}
           <Link to='/login'>
-          <a className="text-purple-600 hover:underline font-medium">
+          <li className="text-purple-600 hover:underline font-medium list-none inline">
             Login Now
-          </a>
+          </li>
           </Link>
         </p>
 
@@ -97,7 +110,7 @@ export default function RegisterForm() {
         </div>
 
         {/* Google Sign In */}
-        <button
+        <button onClick={handleGoogleSignUp}
           type="button"
           className="mt-6 w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-3 px-4 text-gray-700 font-medium hover:bg-gray-50 transition"
         >
