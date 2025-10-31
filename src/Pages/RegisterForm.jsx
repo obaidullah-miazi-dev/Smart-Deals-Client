@@ -115,22 +115,22 @@ export default function RegisterForm() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold py-3 rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-200 shadow-md"
+            className="w-full bg-gradient hover-eff text-white font-semibold py-3 rounded-lg cursor-pointer transition duration-200 shadow-md"
           >
             Register
           </button>
         </form>
 
         <div className="mt-6 flex items-center justify-center">
-          <div className="border-t border-gray-300 flex-grow"></div>
+          <div className="border-t border-gray-300 grow"></div>
           <span className="px-4 text-sm text-gray-500 bg-white">OR</span>
-          <div className="border-t border-gray-300 flex-grow"></div>
+          <div className="border-t border-gray-300 grow"></div>
         </div>
 
         {/* Google Sign In */}
         <button onClick={handleGoogleSignUp}
           type="button"
-          className="mt-6 w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-3 px-4 text-gray-700 font-medium hover:bg-gray-50 transition"
+          className="mt-6 w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-3 px-4 text-gray-700 font-medium hover:bg-gray-50 transition cursor-pointer"
         >
           <img
             src="https://www.google.com/favicon.ico"

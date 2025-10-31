@@ -3,6 +3,19 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: blue;
-  --color-secondary: teal;
+  --color-primary: #5107ff;
+  --color-secondary: #FFC107;
+}
+
+
+.bg-gradient{
+  @apply bg-linear-to-br from-[#5107ff] to-[#8026ff]
+}
+
+.hover-eff{
+  @apply hover:bg-linear-to-br hover:from-[#804aff] hover:to-[#8e3eff]
+}
+
+.active{
+  @apply text-primary
 }

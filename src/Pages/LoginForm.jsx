@@ -26,9 +26,9 @@ export default function LoginForm() {
                 <p className="text-center text-sm text-gray-600 mb-6">
                     Don't have an account?{' '}
                     <Link to='/register'>
-                        <a className="text-purple-600 hover:underline font-medium">
+                        <li className="text-purple-600 hover:underline font-medium list-none inline">
                             Register Now
-                        </a>
+                        </li>
                     </Link>
                 </p>
 
@@ -67,7 +67,7 @@ export default function LoginForm() {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full bg-linear-to-r from-purple-600 to-purple-700 text-white font-semibold py-3 rounded-lg hover:from-purple-700 hover:to-purple-800 transition duration-200 shadow-md"
+                        className="w-full bg-gradient text-white font-semibold py-3 rounded-lg hover-eff cursor-pointer transition duration-200 shadow-md"
                     >
                         Login
                     </button>
@@ -82,7 +82,7 @@ export default function LoginForm() {
                 {/* Google Sign In */}
                 <button onClick={handleGoogleSignIn}
                     type="button"
-                    className="mt-6 w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-3 px-4 text-gray-700 font-medium hover:bg-gray-50 transition"
+                    className="mt-6 w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-3 px-4 text-gray-700 font-medium hover:bg-gray-50 transition cursor-pointer"
                 >
                     <img
                         src="https://www.google.com/favicon.ico"
