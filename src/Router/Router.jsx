@@ -6,6 +6,7 @@ import MyProducts from "../Pages/MyProducts";
 import MyBids from "../Pages/MyBids";
 import CreateProduct from "../Pages/CreateProduct";
 import RegisterForm from "../Pages/RegisterForm";
+import LoginForm from "../Pages/LoginForm";
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
             {
                 path: '/register',
                 Component: RegisterForm
+            },
+            {
+                path: '/login',
+                Component: LoginForm
             }
         ]
     }

@@ -66,9 +66,11 @@ const Navbar = () => {
 
                     {/* button  */}
                     <div className="hidden md:flex items-center gap-4">
-                        <button className="px-5 py-2.5 hover:bg-gradient-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-gradient-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Login</button>
+                        <Link to='/login'>
+                            <button className="px-5 py-2.5 hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Login</button>
+                        </Link>
                         <Link to='/register'>
-                            <button className="px-5 py-2.5 hover:bg-gradient-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-gradient-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Register</button>
+                            <button className="px-5 py-2.5 hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Register</button>
                         </Link>
                     </div>
 
@@ -87,8 +89,12 @@ const Navbar = () => {
 
                             {/* button  */}
                             <div>
-                                <button className="px-5 py-2.5 w-full mb-2 rounded-full hover:bg-gradient-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-gradient-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center justify-center gap-2 text-white font-semibold">login</button>
-                                <button className="px-5 py-2.5 w-full rounded-full hover:bg-gradient-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-gradient-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center justify-center gap-2 text-white font-semibold">Register</button>
+                                <Link to='/login'>
+                                    <button className="px-5 py-2.5 w-full mb-2 rounded-full hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center justify-center gap-2 text-white font-semibold">login</button>
+                                </Link>
+                                <Link to='/register'>
+                                    <button className="px-5 py-2.5 w-full rounded-full hover:bg-linear-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-linear-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center justify-center gap-2 text-white font-semibold">Register</button>
+                                </Link>
                             </div>
                         </ul>
                     </div>
