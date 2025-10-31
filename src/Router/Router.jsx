@@ -5,6 +5,7 @@ import AllProducts from "../Pages/AllProducts";
 import MyProducts from "../Pages/MyProducts";
 import MyBids from "../Pages/MyBids";
 import CreateProduct from "../Pages/CreateProduct";
+import RegisterForm from "../Pages/RegisterForm";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
             {
                 path: '/createProduct',
                 Component: CreateProduct
+            },
+            {
+                path: '/register',
+                Component: RegisterForm
             }
         ]
     }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Container from './Container';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { Menu, X } from 'lucide-react';
 
 
@@ -67,7 +67,9 @@ const Navbar = () => {
                     {/* button  */}
                     <div className="hidden md:flex items-center gap-4">
                         <button className="px-5 py-2.5 hover:bg-gradient-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-gradient-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Login</button>
-                        <button className="px-5 py-2.5 hover:bg-gradient-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-gradient-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Register</button>
+                        <Link to='/register'>
+                            <button className="px-5 py-2.5 hover:bg-gradient-to-br hover:from-[#5107ff] hover:to-[#8026ff] cursor-pointer bg-gradient-to-br from-[#632EE3] to-[#9F62F2] transition flex items-center gap-2 text-white font-semibold rounded-full">Register</button>
+                        </Link>
                     </div>
 
                     <button
@@ -81,7 +83,7 @@ const Navbar = () => {
                 {open && (
                     <div className="md:hidden bg-white border-t border-gray-100 shadow-sm">
                         <ul className="flex flex-col items-center gap-4 py-6 text-gray-700 font-medium">
-                           {Links}
+                            {Links}
 
                             {/* button  */}
                             <div>
