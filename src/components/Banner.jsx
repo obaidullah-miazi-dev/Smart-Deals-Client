@@ -1,10 +1,10 @@
 import React from 'react';
-import { Search, PlayCircle } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { Link } from 'react-router';
 
 const Banner = () => {
     return (
-        <div className="relative min-h-[380px] bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 overflow-hidden">
+        <div className="relative min-h-[380px] bg-linear-to-br from-purple-50 via-pink-50 to-blue-50 overflow-hidden">
             <div className="absolute inset-0 opacity-30">
                 <svg
                     className="w-full h-full"
@@ -43,7 +43,7 @@ const Banner = () => {
                         <input
                             type="text"
                             placeholder="Search for Products, Categories..."
-                            className="flex-grow outline-none text-gray-700 placeholder-gray-400"
+                            className="grow outline-none text-gray-700 placeholder-gray-400"
                         />
                         <button className="bg-primary text-white p-3 rounded-full hover-eff transition">
                             <Search className="w-6 h-6" />
