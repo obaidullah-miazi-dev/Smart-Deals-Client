@@ -1,6 +1,10 @@
 import { createBrowserRouter } from "react-router";
 import Root from "../Layouts/Root";
 import Home from "../Pages/Home";
+import AllProducts from "../Pages/AllProducts";
+import MyProducts from "../Pages/MyProducts";
+import MyBids from "../Pages/MyBids";
+import CreateProduct from "../Pages/CreateProduct";
 
 export const router = createBrowserRouter([
     {
@@ -10,6 +14,22 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home
+            },
+            {
+                path: '/allProducts',
+                Component: AllProducts
+            },
+            {
+                path: '/myProducts',
+                Component: MyProducts
+            },
+            {
+                path: '/myBids',
+                Component: MyBids
+            },
+            {
+                path: '/createProduct',
+                Component: CreateProduct
             }
         ]
     }
