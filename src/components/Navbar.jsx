@@ -31,7 +31,7 @@ const Navbar = () => {
 
         <NavLink to='/myBids'
             className={({ isActive }) =>
-                `${isActive ? "btext[#632EE3]" : ""
+                `${isActive ? "text-[#632EE3]" : ""
                 }`
             }>
             <li className="hover:border-b-2 hover:border-[#632EE3] transition cursor-pointer font-semibold text-lg">My Bids</li>
@@ -39,7 +39,7 @@ const Navbar = () => {
 
         <NavLink to='/createProduct'
             className={({ isActive }) =>
-                `${isActive ? "btext[#632EE3]" : ""
+                `${isActive ? "text-[#632EE3]" : ""
                 }`
             }>
             <li className="hover:border-b-2 hover:border-[#632EE3] transition cursor-pointer font-semibold text-lg">Create Product</li>
