@@ -36,7 +36,7 @@ const Home = () => {
 
             <Container>
                 <h2 className='font-bold text-center md:text-5xl text-3xl mt-8'>Recent <span className='text-primary'>Products</span></h2>
-                <div className='grid md:grid-cols-3 grid-cols-1 justify-center items-center gap-8 mt-10'>
+                <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center items-center gap-8 mt-10'>
                     {
                         products.map(product => <RecentProducts key={product._id} product={product}></RecentProducts>)
                     }
