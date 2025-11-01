@@ -10,6 +10,23 @@ export default function LoginForm() {
         googleLogIn()
             .then(res => {
                 console.log(res.user)
+                const newUser = {
+                name: res.user.displayName,
+                email: res.user.email,
+                image: res.user.photoURL 
+            }
+            // create user in database
+            fetch('http://localhost:3000/users',{
+                method: 'POST',
+                headers:{
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            })
+            .then(res=> res.json())
+            .then(data =>{
+                console.log(data);
+            })
             })
             .catch(err => {
                 console.log(err)

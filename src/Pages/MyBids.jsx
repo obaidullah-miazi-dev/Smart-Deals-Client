@@ -16,6 +16,21 @@ const MyBids = () => {
                 })
         }
     }, [user?.email])
+
+    const handleDeleteBid= (_id)=>{
+        alert('are you sure to delete this bid')
+        fetch(`http://localhost:3000/bids/${_id}`,{
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data =>{
+            console.log('after deleted',data);
+            if(data.deletedCount){
+                const remainingBids = myBids.filter(bids => bids._id !== _id)
+                setMyBids(remainingBids)
+            }
+        })
+    }
     return (
         <Container>
             <div>
@@ -40,7 +55,7 @@ const MyBids = () => {
                         </thead>
                         {myBids.map((bid, index) =>
 
-                            <tbody>
+                            <tbody key={bid._id}>
                                 {/* row 1 */}
                                 <tr>
                                     <th>{index + 1}</th>
@@ -82,7 +97,7 @@ const MyBids = () => {
                                     </td>
                                     <td>{bid.offeredPrice}</td>
                                     <th>
-                                        <button
+                                        <button onClick={()=> handleDeleteBid(bid._id)}
                                             className="btn bg-white border
                                              border-red-500 text-red-500">
                                             Remove Bid</button>
