@@ -32,15 +32,20 @@ const Navbar = () => {
             <li className="hover:text-primary transition cursor-pointer font-semibold text-lg">All Products
             </li>
         </NavLink>
-        <NavLink to='/myProducts'>
-            <li className="hover:text-primary transition cursor-pointer font-semibold text-lg">My Products
-            </li>
-        </NavLink>
 
-        <NavLink to='/myBids'>
-            <li className="hover:text-primary transition cursor-pointer font-semibold text-lg">My Bids
-            </li>
-        </NavLink>
+        {
+            user && <>
+                <NavLink to='/myProducts'>
+                    <li className="hover:text-primary transition cursor-pointer font-semibold text-lg">My Products
+                    </li>
+                </NavLink>
+
+                <NavLink to='/myBids'>
+                    <li className="hover:text-primary transition cursor-pointer font-semibold text-lg">My Bids
+                    </li>
+                </NavLink>
+            </>
+        }
 
         <NavLink to='/createProduct'>
             <li className="hover:text-primary transition cursor-pointer font-semibold text-lg">Create Product
@@ -52,16 +57,16 @@ const Navbar = () => {
     const buttons = <>
         {user ?
 
-        <button onClick={handleLogOut} className="px-5 py-2.5 hover-eff cursor-pointer bg-gradient transition flex items-center gap-2 text-white font-semibold rounded-full">Log Out</button>
-        :
-        <div className='flex gap-3 items-center'>
-            <Link to='/login'>
-                <button className="px-5 py-2.5 hover-eff cursor-pointer bg-gradient transition flex items-center gap-2 text-white font-semibold rounded-full">Login</button>
-            </Link>
-            <Link to='/register'>
-                <button className="px-5 py-2.5 hover-eff cursor-pointer bg-gradient transition flex items-center gap-2 text-white font-semibold rounded-full">Register</button>
-            </Link>
-        </div>}
+            <button onClick={handleLogOut} className="px-5 py-2.5 hover-eff cursor-pointer bg-gradient transition flex items-center gap-2 text-white font-semibold rounded-full">Log Out</button>
+            :
+            <div className='flex gap-3 items-center'>
+                <Link to='/login'>
+                    <button className="px-5 py-2.5 hover-eff cursor-pointer bg-gradient transition flex items-center gap-2 text-white font-semibold rounded-full">Login</button>
+                </Link>
+                <Link to='/register'>
+                    <button className="px-5 py-2.5 hover-eff cursor-pointer bg-gradient transition flex items-center gap-2 text-white font-semibold rounded-full">Register</button>
+                </Link>
+            </div>}
     </>
 
 
