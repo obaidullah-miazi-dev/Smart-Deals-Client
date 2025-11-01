@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Banner from '../components/Banner';
 import Container from '../components/Container';
 import RecentProducts from '../components/RecentProducts';
+import FancyLoader from '../components/FancyLoader';
 
 const Home = () => {
     const [products, setProducts] = useState(null)
@@ -26,7 +27,7 @@ const Home = () => {
     }, [])
     console.log(products);
 
-    if (loading) return <div>Loading....</div>
+    if (loading) return <FancyLoader></FancyLoader>
     if (error) return alert(error)
 
     return (

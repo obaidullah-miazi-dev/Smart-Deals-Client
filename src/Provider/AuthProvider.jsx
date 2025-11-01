@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { app } from '../Firebase/Firebase.config';
+import FancyLoader from '../components/FancyLoader';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext()
@@ -42,7 +43,7 @@ const AuthProvider = ({ children }) => {
         }
     }, [])
 
-    if(loading) return <p>loading......................</p>
+    if(loading) return <FancyLoader></FancyLoader>
 
 
     const authData = {
