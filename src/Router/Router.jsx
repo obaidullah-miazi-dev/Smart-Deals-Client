@@ -8,6 +8,7 @@ import CreateProduct from "../Pages/CreateProduct";
 import RegisterForm from "../Pages/RegisterForm";
 import LoginForm from "../Pages/LoginForm";
 import ProductDetails from "../components/ProductDetails";
+import PrivateRoute from "../Provider/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -33,7 +34,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/createProduct',
-                Component: CreateProduct
+                element: <PrivateRoute>
+                    <CreateProduct></CreateProduct>
+                </PrivateRoute>
             },
             {
                 path: '/register',

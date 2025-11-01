@@ -23,6 +23,7 @@ const AuthProvider = ({ children }) => {
 
     const googleProvider = new GoogleAuthProvider
     const googleLogIn = () => {
+        setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
 
@@ -40,6 +41,8 @@ const AuthProvider = ({ children }) => {
             unsubscribe()
         }
     }, [])
+
+    if(loading) return <p>loading......................</p>
 
 
     const authData = {

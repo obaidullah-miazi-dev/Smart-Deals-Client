@@ -79,7 +79,7 @@ const Navbar = () => {
                 <div className="mx-auto flex justify-between items-center h-12 my-4">
                     <div className="flex items-center gap-2">
                         <NavLink to='/'>
-                            <h2 className='font-bold text-3xl'>Smart<span className='text-primary'>Deals</span></h2>
+                            <h2 className='font-bold text-3xl text-black'>Smart<span className='text-primary'>Deals</span></h2>
                         </NavLink>
                     </div>
 

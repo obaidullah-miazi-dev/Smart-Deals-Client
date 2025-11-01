@@ -1,11 +1,12 @@
 import { use } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 
 export default function LoginForm() {
 
-    const {googleLogIn} = use(AuthContext)
-
+    const {googleLogIn,setLoading} = use(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
     const handleGoogleSignIn = () => {
         googleLogIn()
             .then(res => {
@@ -26,11 +27,14 @@ export default function LoginForm() {
             .then(res=> res.json())
             .then(data =>{
                 console.log(data);
+                console.log(location.state);
+                navigate(`${location.state ? location.state : '/'}`)
             })
             })
             .catch(err => {
                 console.log(err)
             })
+            .finally(()=> setLoading(false))
     }
 
 

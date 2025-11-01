@@ -1,9 +1,11 @@
 import { use } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 
 export default function RegisterForm() {
     const {googleLogIn} = use(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const handleGoogleSignUp = ()=>{
         googleLogIn()
@@ -26,6 +28,7 @@ export default function RegisterForm() {
             .then(res=> res.json())
             .then(data =>{
                 console.log(data);
+                navigate(`${location.state ? location.state : '/'}`)
             })
         })
         .catch(err=>{
