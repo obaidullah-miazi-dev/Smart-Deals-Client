@@ -15,6 +15,36 @@ const ProductDetails = () => {
         modalbox.current.showModal()
     }
 
+    const handleModalClose= ()=>{
+        modalbox.current.close()
+    }
+
+    const handleBidSubmit = (e)=>{
+        e.preventDefault()
+        const buyerName = e.target.buyerName.value
+        const buyerEmail = e.target.buyerEmail.value 
+        const buyerImageUrl = e.target.buyerImageUrl.value
+        const offeredPrice= e.target.offeredPrice.value 
+        const contactInfo = e.target.contactInfo.value
+        console.log(buyerName,buyerEmail,buyerImageUrl,offeredPrice,contactInfo);
+        const newBid = {buyerName,buyerEmail,buyerImageUrl,offeredPrice,contactInfo,productId:_id}
+        // console.log(newBid);
+        fetch('http://localhost:3000/bids',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newBid)
+        })
+        .then(res=>res.json())
+        .then(data =>{
+            console.log('after placing bids',data);
+        })
+        alert('bids placed successfully')
+        modalbox.current.close()
+
+    }
+
     return (
         <div className="min-h-screen bg-gray-50 py-8 px-4">
             <div className="max-w-7xl mx-auto">
@@ -141,7 +171,7 @@ const ProductDetails = () => {
                                         Give Seller Your Offered Price
                                     </h2>
 
-                                    <form className="space-y-6">
+                                    <form onSubmit={handleBidSubmit} className="space-y-6">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             {/* Buyer Name */}
                                             <div>
@@ -235,7 +265,7 @@ const ProductDetails = () => {
                                         <div className="flex justify-end gap-4 pt-4">
 
 
-                                            <button formMethod='dialog'
+                                            <button onClick={handleModalClose} formMethod='dialog'
                                                 className="px-6 py-2.5 h-full border border-gray-300
                                  text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition
                                   cursor-pointer">

@@ -14,8 +14,8 @@ const AllProducts = () => {
             <Container>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center items-center mt-12'>
                 {
-                    products.map(product => <>
-                        <div className='shadow-md rounded-md p-4 space-y-4'>
+                    products.map(product =>  
+                        <div key={product._id} className='shadow-md rounded-md p-4 space-y-4'>
                             <img className='w-full h-[270px] bg-base-200 rounded-md'
                                 src={product.image} alt={product.title} />
                             <h2 className='text-2xl font-bold'>{product.title}</h2>
@@ -29,7 +29,7 @@ const AllProducts = () => {
                                 </button>
                             </Link>
                         </div>
-                    </>)
+                    )
                 }
             </div>
             </Container>
