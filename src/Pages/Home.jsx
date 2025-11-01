@@ -11,7 +11,7 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch('http://localhost:3000/latestProducts')
+                const res = await fetch('https://smart-deals-db-server.onrender.com/latestProducts')
                 const data = await res.json()
                 setProducts(data)
             }

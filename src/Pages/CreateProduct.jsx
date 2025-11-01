@@ -32,7 +32,7 @@ const CreateProduct = () => {
         console.log('Product Created:', formData);
         alert('product created successfully')
         // Send to API 
-        fetch('http://localhost:3000/products', {
+        fetch('https://smart-deals-db-server.onrender.com/products', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

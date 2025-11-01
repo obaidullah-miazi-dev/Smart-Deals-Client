@@ -17,7 +17,7 @@ export default function LoginForm() {
                 image: res.user.photoURL 
             }
             // create user in database
-            fetch('http://localhost:3000/users',{
+            fetch('https://smart-deals-db-server.onrender.com/users',{
                 method: 'POST',
                 headers:{
                     'content-type': 'application/json'

@@ -8,7 +8,7 @@ const MyBids = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/bids?email=${user.email}`)
+            fetch(`https://smart-deals-db-server.onrender.com/bids?email=${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
@@ -19,7 +19,7 @@ const MyBids = () => {
 
     const handleDeleteBid= (_id)=>{
         alert('are you sure to delete this bid')
-        fetch(`http://localhost:3000/bids/${_id}`,{
+        fetch(`https://smart-deals-db-server.onrender.com/bids/${_id}`,{
             method: 'DELETE'
         })
         .then(res => res.json())

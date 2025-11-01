@@ -33,7 +33,7 @@ const ProductDetails = () => {
         }
         const newBid = { buyerName, buyerEmail, buyerImageUrl, offeredPrice, contactInfo, productId: _id,image,title,seller_image,seller_name,price_max,price_min,email }
         console.log(newBid);
-        fetch('http://localhost:3000/bids', {
+        fetch('https://smart-deals-db-server.onrender.com/bids', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -57,7 +57,7 @@ const ProductDetails = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:3000/products/bids/${_id}`)
+        fetch(`https://smart-deals-db-server.onrender.com/products/bids/${_id}`)
             .then(res => res.json())
             .then(data => {
                 console.log('bids collection for this product', data);

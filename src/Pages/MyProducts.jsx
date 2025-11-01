@@ -8,7 +8,7 @@ const MyProducts = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/products?email=${user.email}`)
+            fetch(`https://smart-deals-db-server.onrender.com/products?email=${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
@@ -19,7 +19,7 @@ const MyProducts = () => {
 
     const handleDeleteproducts= (_id)=>{
         alert('are you sure to delete this products')
-        fetch(`http://localhost:3000/products/${_id}`,{
+        fetch(`https://smart-deals-db-server.onrender.com/products/${_id}`,{
             method: 'DELETE'
         })
         .then(res => res.json())
