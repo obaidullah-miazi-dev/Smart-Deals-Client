@@ -32,7 +32,7 @@ const ProductDetails = () => {
             return alert('please place your bid price')
         }
         const newBid = { buyerName, buyerEmail, buyerImageUrl, offeredPrice, contactInfo, productId: _id,image,title,seller_image,seller_name,price_max,price_min,email }
-        // console.log(newBid);
+        console.log(newBid);
         fetch('http://localhost:3000/bids', {
             method: 'POST',
             headers: {
