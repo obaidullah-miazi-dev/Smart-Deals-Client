@@ -78,9 +78,32 @@ const ProductDetails = () => {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Left Column: Image Placeholder */}
-                    <div className="lg:col-span-1">
-                        <div className="">
+                    <div className="lg:col-span-1 space-y-5">
+                        <div>
                             <img src={image} className='bg-gray-200 border-2 border-dashed rounded-xl w-full h-96 flex items-center justify-center text-gray-400' alt={title} />
+                        </div>
+                        {/* Product Description */}
+                        <div className="bg-white h- rounded-xl p-6 shadow-sm">
+                            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                                Product Description
+                            </h2>
+
+                            {/* Condition & Usage */}
+                            <div className="flex flex-wrap gap-4 mb-4">
+                                <div className="flex items-center gap-2 bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
+                                    <CheckCircle className="w-4 h-4" />
+                                    Condition: {condition}
+                                </div>
+                                <div className="flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
+                                    <Calendar className="w-4 h-4" />
+                                    Usage : {usage}
+                                </div>
+                            </div>
+
+                            <p className="text-gray-600 leading-relaxed">
+                                {description}
+                            </p>
+
                         </div>
                     </div>
 
@@ -115,29 +138,7 @@ const ProductDetails = () => {
                             </div>
                         </div>
 
-                        {/* Product Description */}
-                        <div className="bg-white rounded-xl p-6 shadow-sm">
-                            <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                                Product Description
-                            </h2>
-
-                            {/* Condition & Usage */}
-                            <div className="flex flex-wrap gap-4 mb-4">
-                                <div className="flex items-center gap-2 bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-medium">
-                                    <CheckCircle className="w-4 h-4" />
-                                    Condition: {condition}
-                                </div>
-                                <div className="flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
-                                    <Calendar className="w-4 h-4" />
-                                    Usage : {usage}
-                                </div>
-                            </div>
-
-                            <p className="text-gray-600 leading-relaxed">
-                                {description}
-                            </p>
-
-                        </div>
+                        
 
                         {/* Seller Information */}
                         <div className="bg-white rounded-xl p-6 shadow-sm">
