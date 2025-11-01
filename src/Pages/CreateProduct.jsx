@@ -2,6 +2,7 @@
 import React, { use } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import { AuthContext } from '../Provider/AuthProvider';
+import { Link } from 'react-router';
 
 const CreateProduct = () => {
     const {user} = use(AuthContext)
@@ -49,10 +50,12 @@ const CreateProduct = () => {
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
+        <Link to='/allProducts'>
         <button className="flex items-center gap-2 text-gray-700 hover:text-primary transition mb-6">
           <ArrowLeft className="w-5 h-5" />
           Back To Products
         </button>
+        </Link>
 
         {/* Title */}
         <h1 className="text-4xl font-bold text-center text-primary mb-8">
@@ -74,30 +77,55 @@ const CreateProduct = () => {
                 type="text"
                 id="title"
                 name="title"
-                placeholder="e.g. Yamaha Fz Guitar for Sale"
+                placeholder="Product Name"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
                 required
               />
             </div>
 
-            {/* Category */}
-            <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
-                Category
-              </label>
-              <select
-                id="category"
-                name="category"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
-                required
-              >
-                <option value="">Select a Category</option>
-                <option>Art and Hobbies</option>
-                <option>Electronics</option>
-                <option>Fashion</option>
-                <option>Home & Living</option>
-              </select>
-            </div>
+            {/* Category - Smart Select with "Other" */}
+<div>
+  <label htmlFor="categorySelect" className="block text-sm font-medium text-gray-700 mb-1">
+    Category
+  </label>
+
+  <div className="space-y-2">
+    <select
+      id="categorySelect"
+      name="categorySelect"
+      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
+      onChange={(e) => {
+        const select = e.target;
+        const customInput = select.parentElement.querySelector('#customCategory');
+        if (e.target.value === 'other') {
+          customInput.classList.remove('hidden');
+          customInput.focus();
+        } else {
+          customInput.classList.add('hidden');
+          customInput.value = '';
+        }
+      }}
+    >
+      <option value="">Select a Category</option>
+      <option value="Art and Hobbies">Art and Hobbies</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Fashion">Fashion</option>
+      <option value="Home & Living">Home & Living</option>
+      <option value="Sports">Sports</option>
+      <option value="Books">Books</option>
+      <option value="other">Other (Type your own)</option>
+    </select>
+
+    {/* Custom Input - Hidden by default */}
+    <input
+      type="text"
+      id="customCategory"
+      name="customCategory"
+      placeholder="Enter your custom category..."
+      className="hidden w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
+    />
+  </div>
+</div>
 
             {/* Min Price */}
             <div>
@@ -166,7 +194,7 @@ const CreateProduct = () => {
               type="text"
               id="usageTime"
               name="usageTime"
-              placeholder="e.g. 1 year 3 month"
+              placeholder="Usage Time"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
             />
           </div>
@@ -196,7 +224,7 @@ const CreateProduct = () => {
                 type="text"
                 id="sellerName"
                 name="name"
-                defaultValue={user.displayName}
+                value={user?.displayName}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
                 required
               />
@@ -211,7 +239,7 @@ const CreateProduct = () => {
                 type="email"
                 id="sellerEmail"
                 name="email"
-                defaultValue={user.email}
+                value={user?.email}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
                 required
               />
@@ -226,7 +254,7 @@ const CreateProduct = () => {
                 type="tel"
                 id="sellerContact"
                 name="contact"
-                placeholder="e.g. +1-555-1234"
+                placeholder="Your Contact Number"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
                 required
               />
@@ -241,7 +269,7 @@ const CreateProduct = () => {
                 type="url"
                 id="sellerImageUrl"
                 name="sellerImageUrl"
-                defaultValue={user.photoURL}
+                value={user?.photoURL}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
               />
             </div>
@@ -271,7 +299,7 @@ const CreateProduct = () => {
               id="description"
               name="description"
               rows={4}
-              placeholder="e.g. I bought this product 3 month ago, did not used more than 1/2 time... actually learning guitar is so tough....."
+              placeholder="Write Your Products Details for More Attention"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition resize-none"
               required
             ></textarea>
