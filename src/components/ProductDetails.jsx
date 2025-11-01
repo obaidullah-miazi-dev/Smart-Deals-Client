@@ -15,33 +15,36 @@ const ProductDetails = () => {
         modalbox.current.showModal()
     }
 
-    const handleModalClose= ()=>{
+    const handleModalClose = () => {
         modalbox.current.close()
     }
 
-    const handleBidSubmit = (e)=>{
+    const handleBidSubmit = (e) => {
         e.preventDefault()
         const buyerName = e.target.buyerName.value
-        const buyerEmail = e.target.buyerEmail.value 
+        const buyerEmail = e.target.buyerEmail.value
         const buyerImageUrl = e.target.buyerImageUrl.value
-        const offeredPrice= e.target.offeredPrice.value 
+        const offeredPrice = e.target.offeredPrice.value
         const contactInfo = e.target.contactInfo.value
-        console.log(buyerName,buyerEmail,buyerImageUrl,offeredPrice,contactInfo);
-        const newBid = {buyerName,buyerEmail,buyerImageUrl,offeredPrice,contactInfo,productId:_id}
+        console.log(buyerName, buyerEmail, buyerImageUrl, offeredPrice, contactInfo);
+        const newBid = { buyerName, buyerEmail, buyerImageUrl, offeredPrice, contactInfo, productId: _id }
         // console.log(newBid);
-        fetch('http://localhost:3000/bids',{
+        fetch('http://localhost:3000/bids', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(newBid)
         })
-        .then(res=>res.json())
-        .then(data =>{
-            console.log('after placing bids',data);
-        })
-        alert('bids placed successfully')
-        modalbox.current.close()
+            .then(res => res.json())
+            .then(data => {
+                console.log('after placing bids', data);
+                if (data.insertedId) {
+                    alert('bids placed successfully')
+                    modalbox.current.close()
+                }
+            })
+
 
     }
 
