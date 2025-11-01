@@ -47,14 +47,14 @@ const MyBids = () => {
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
-                                                <div className=" h-12 w-24">
-                                                    <img className='w-full rounded-md'
+                                                <div className=" h-20 w-36">
+                                                    <img className='w-full rounded-md object-fill'
                                                         src={bid?.image}
                                                         alt={bid.title} />
                                                 </div>
                                             </div>
-                                            <div>
-                                                <div className="font-bold">{bid.title}</div>
+                                            <div className='space-y-2'>
+                                                <div className="font-bold text-lg">{bid.title}</div>
                                                 <div className="text-sm opacity-50">
                                                     $ {bid.price_min} - {bid.price_max}
                                                 </div>
