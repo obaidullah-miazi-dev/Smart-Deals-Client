@@ -11,46 +11,52 @@ import ProductDetails from "../components/ProductDetails";
 import PrivateRoute from "../Provider/PrivateRoute";
 
 export const router = createBrowserRouter([
-    {
-        path: '/',
-        Component: Root,
-        children: [
-            {
-                index: true,
-                Component: Home
-            },
-            {
-                path: '/allProducts',
-                loader: ()=> fetch('https://smart-deals-db-server.onrender.com/products'),
-                Component: AllProducts
-            },
-            {
-                path: '/myProducts',
-                Component: MyProducts
-            },
-            {
-                path: '/myBids',
-                Component: MyBids
-            },
-            {
-                path: '/createProduct',
-                element: <PrivateRoute>
-                    <CreateProduct></CreateProduct>
-                </PrivateRoute>
-            },
-            {
-                path: '/register',
-                Component: RegisterForm
-            },
-            {
-                path: '/login',
-                Component: LoginForm
-            },
-            {
-                path: '/productDetails/:id',
-                loader: ({params}) => fetch(`https://smart-deals-db-server.onrender.com/products/${params.id}`),
-                Component: ProductDetails
-            }
-        ]
-    }
-])
+  {
+    path: "/",
+    Component: Root,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "/allProducts",
+        loader: () =>
+          fetch("https://smart-deals-db-server.onrender.com/products"),
+        Component: AllProducts,
+      },
+      {
+        path: "/myProducts",
+        Component: MyProducts,
+      },
+      {
+        path: "/myBids",
+        Component: MyBids,
+      },
+      {
+        path: "/createProduct",
+        element: (
+          <PrivateRoute>
+            <CreateProduct></CreateProduct>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/register",
+        Component: RegisterForm,
+      },
+      {
+        path: "/login",
+        Component: LoginForm,
+      },
+      {
+        path: "/productDetails/:id",
+        loader: ({ params }) =>
+          fetch(
+            `https://smart-deals-db-server.onrender.com/products/${params.id}`
+          ),
+        Component: ProductDetails,
+      },
+    ],
+  },
+]);

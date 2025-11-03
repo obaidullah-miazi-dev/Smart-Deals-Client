@@ -3,41 +3,40 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 
 export default function RegisterForm() {
-    const {googleLogIn} = use(AuthContext)
-    const navigate = useNavigate()
-    const location = useLocation()
+  const { googleLogIn } = use(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const handleGoogleSignUp = ()=>{
-        googleLogIn()
-        .then(res =>{
-            console.log(res.user)
+  const handleGoogleSignUp = () => {
+    googleLogIn()
+      .then((res) => {
+        // console.log(res.user)
 
-            const newUser = {
-                name: res.user.displayName,
-                email: res.user.email,
-                image: res.user.photoURL 
-            }
-            // create user in database
-            fetch('https://smart-deals-db-server.onrender.com/users',{
-                method: 'POST',
-                headers:{
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(newUser)
-            })
-            .then(res=> res.json())
-            .then(data =>{
-                console.log(data);
-                navigate(`${location.state ? location.state : '/'}`)
-            })
+        const newUser = {
+          name: res.user.displayName,
+          email: res.user.email,
+          image: res.user.photoURL,
+        };
+        // create user in database
+        fetch("https://smart-deals-db-server.onrender.com/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newUser),
         })
-        .catch(err=>{
-            console.log(err)
-        })
-    }
+          .then((res) => res.json())
+          // eslint-disable-next-line no-unused-vars
+          .then((data) => {
+            // console.log(data);
+            navigate(`${location.state ? location.state : "/"}`);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-
-  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50 p-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
@@ -45,18 +44,21 @@ export default function RegisterForm() {
           Register Now!
         </h1>
         <p className="text-center text-sm text-gray-600 mb-6">
-          Already have an account?{' '}
-          <Link to='/login'>
-          <li className="text-purple-600 hover:underline font-medium list-none inline">
-            Login Now
-          </li>
+          Already have an account?{" "}
+          <Link to="/login">
+            <li className="text-purple-600 hover:underline font-medium list-none inline">
+              Login Now
+            </li>
           </Link>
         </p>
 
-        <form  className="space-y-5">
+        <form className="space-y-5">
           {/* Name */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Name
             </label>
             <input
@@ -69,10 +71,12 @@ export default function RegisterForm() {
             />
           </div>
 
-
           {/* Image URL */}
           <div>
-            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="imageUrl"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Image URL
             </label>
             <input
@@ -84,10 +88,12 @@ export default function RegisterForm() {
             />
           </div>
 
-
           {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Email
             </label>
             <input
@@ -102,7 +108,10 @@ export default function RegisterForm() {
 
           {/* Password */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Password
             </label>
             <input
@@ -131,7 +140,8 @@ export default function RegisterForm() {
         </div>
 
         {/* Google Sign In */}
-        <button onClick={handleGoogleSignUp}
+        <button
+          onClick={handleGoogleSignUp}
           type="button"
           className="mt-6 w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-3 px-4 text-gray-700 font-medium hover:bg-gray-50 transition cursor-pointer"
         >

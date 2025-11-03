@@ -27,12 +27,12 @@ const ProductDetails = () => {
         const buyerImageUrl = e.target.buyerImageUrl.value
         const offeredPrice = e.target.offeredPrice.value
         const contactInfo = e.target.contactInfo.value
-        console.log(buyerName, buyerEmail, buyerImageUrl, offeredPrice, contactInfo);
+        // console.log(buyerName, buyerEmail, buyerImageUrl, offeredPrice, contactInfo);
         if(offeredPrice.length == 0){
             return alert('please place your bid price')
         }
         const newBid = { buyerName, buyerEmail, buyerImageUrl, offeredPrice, contactInfo, productId: _id,image,title,seller_image,seller_name,price_max,price_min,email }
-        console.log(newBid);
+        // console.log(newBid);
         fetch('https://smart-deals-db-server.onrender.com/bids', {
             method: 'POST',
             headers: {
@@ -42,7 +42,7 @@ const ProductDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('after placing bids', data);
+                // console.log('after placing bids', data);
                 if (data.insertedId) {
                     alert('bids placed successfully')
                     newBid._id= data.insertedId
@@ -60,7 +60,7 @@ const ProductDetails = () => {
         fetch(`https://smart-deals-db-server.onrender.com/products/bids/${_id}`)
             .then(res => res.json())
             .then(data => {
-                console.log('bids collection for this product', data);
+                // console.log('bids collection for this product', data);
                 setBids(data)
             })
     }, [_id])
