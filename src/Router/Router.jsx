@@ -27,11 +27,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/myProducts",
-        Component: MyProducts,
+        element: (
+          <PrivateRoute>
+            <MyProducts></MyProducts>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myBids",
-        Component: MyBids,
+        element: (
+          <PrivateRoute>
+            <MyBids></MyBids>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/createProduct",
@@ -55,7 +63,11 @@ export const router = createBrowserRouter([
           fetch(
             `https://smart-deals-db-server.onrender.com/products/${params.id}`
           ),
-        Component: ProductDetails,
+        element: (
+          <PrivateRoute>
+            <ProductDetails></ProductDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },
