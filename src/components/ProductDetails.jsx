@@ -3,6 +3,7 @@ import React, { use, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, MessageCircle, MapPin, Calendar, CheckCircle } from 'lucide-react';
 import { Link, useLoaderData } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
+import axios from 'axios';
 
 const ProductDetails = () => {
     const product = useLoaderData()
@@ -57,11 +58,10 @@ const ProductDetails = () => {
     }
 
     useEffect(() => {
-        fetch(`https://smart-deals-db-server.onrender.com/products/bids/${_id}`)
-            .then(res => res.json())
+        axios(`https://smart-deals-db-server.onrender.com/products/bids/${_id}`)
             .then(data => {
                 // console.log('bids collection for this product', data);
-                setBids(data)
+                setBids(data.data)
             })
     }, [_id])
 

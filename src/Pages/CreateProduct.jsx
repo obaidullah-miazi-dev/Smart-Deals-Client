@@ -2,6 +2,7 @@
 import React, { use } from "react";
 import { ArrowLeft } from "lucide-react";
 import { AuthContext } from "../Provider/AuthProvider";
+import axios from "axios";
 
 const CreateProduct = () => {
   const { user } = use(AuthContext);
@@ -28,19 +29,14 @@ const CreateProduct = () => {
       status: "pending",
     };
 
-    // console.log('Product Created:', formData);
-    alert("product created successfully");
     // Send to API
-    fetch("https://smart-deals-db-server.onrender.com/products", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      // eslint-disable-next-line no-unused-vars
-      .then((data) => {});
+    axios
+      .post("https://smart-deals-db-server.onrender.com/products", formData)
+      .then((data) => {
+        if (data.data.insertedId) {
+          return alert("product created successfully");
+        }
+      });
   };
 
   return (
