@@ -38,7 +38,6 @@ export default function LoginForm() {
         // create user in database
         axiosInstance
           .post("/users", newUser)
-          // eslint-disable-next-line no-unused-vars
           .then((data) => {
             // console.log(data);
             // console.log(location.state);
