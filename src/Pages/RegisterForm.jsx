@@ -1,13 +1,30 @@
+/* eslint-disable no-unused-vars */
 import { use } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import useAxios from "../Hooks/useAxios";
 
 export default function RegisterForm() {
-  const { googleLogIn } = use(AuthContext);
+  const { googleLogIn, createUser,setLoading } = use(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const axiosInstance = useAxios()
+  const axiosInstance = useAxios();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    createUser(email, password)
+      .then((data) => {
+        alert('Account Created Successfully')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        alert(errorCode);
+      });
+      setLoading(false)
+      navigate('/login')
+  };
 
   const handleGoogleSignUp = () => {
     googleLogIn()
@@ -20,7 +37,8 @@ export default function RegisterForm() {
           image: res.user.photoURL,
         };
         // create user in database
-        axiosInstance.post("/users",newUser)
+        axiosInstance
+          .post("/users", newUser)
           // eslint-disable-next-line no-unused-vars
           .then((data) => {
             // console.log(data);
@@ -47,7 +65,7 @@ export default function RegisterForm() {
           </Link>
         </p>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleRegister}>
           {/* Name */}
           <div>
             <label
@@ -67,7 +85,7 @@ export default function RegisterForm() {
           </div>
 
           {/* Image URL */}
-          <div>
+          {/* <div>
             <label
               htmlFor="imageUrl"
               className="block text-sm font-medium text-gray-700 mb-1"
@@ -81,7 +99,7 @@ export default function RegisterForm() {
               placeholder="https://example.com/avatar.jpg"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
             />
-          </div>
+          </div> */}
 
           {/* Email */}
           <div>
