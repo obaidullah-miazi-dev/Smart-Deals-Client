@@ -3,12 +3,12 @@ import React, { use } from "react";
 import { ArrowLeft } from "lucide-react";
 import { AuthContext } from "../Provider/AuthProvider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const CreateProduct = () => {
   const { user } = use(AuthContext);
-  const axiosInstanceSecure = useAxiosSecure()
-  const navigate = useNavigate()
+  const axiosInstanceSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -33,10 +33,9 @@ const CreateProduct = () => {
     };
 
     // Send to API
-    axiosInstanceSecure.post("/products", formData)
-    .then((data) => {
+    axiosInstanceSecure.post("/products", formData).then((data) => {
       if (data.data.insertedId) {
-        navigate('/')
+        navigate("/");
         return alert("product created successfully");
       }
     });
@@ -46,10 +45,12 @@ const CreateProduct = () => {
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Back Button */}
-        <button className="flex items-center gap-2 text-gray-700 hover:text-primary transition mb-6">
-          <ArrowLeft className="w-5 h-5" />
-          Back To Products
-        </button>
+        <Link to='/allProducts'>
+          <button className="flex items-center gap-2 text-gray-700 hover:text-primary transition mb-6">
+            <ArrowLeft className="w-5 h-5" />
+            Back To Products
+          </button>
+        </Link>
 
         {/* Title */}
         <h1 className="text-4xl font-bold text-center text-primary mb-8">
