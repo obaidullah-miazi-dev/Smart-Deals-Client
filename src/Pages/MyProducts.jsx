@@ -33,7 +33,7 @@ const MyProducts = () => {
   };
   return (
     <Container>
-      <div>
+      <div className="min-h-screen">
         <h2 className="font-bold text-2xl md:text-4xl mt-18 mb-5">
           My Products :
           <span className="text-primary px-2">{myProducts.length}</span>

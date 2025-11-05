@@ -45,7 +45,7 @@ const MyBids = () => {
   };
   return (
     <Container>
-      <div>
+      <div className="min-h-screen">
         <h2 className="font-bold text-2xl md:text-4xl mt-18 mb-5">
           My Bids :<span className="text-primary px-2">{myBids.length}</span>
         </h2>
