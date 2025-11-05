@@ -26,7 +26,7 @@ const AllProducts = () => {
                   alt={product.title}
                 />
                 <h2 className="text-2xl font-bold">{product.title}</h2>
-                <p className="text-gray-500 h-auto">{product.description}</p>
+                <p className="text-gray-500 h-auto line-clamp-3">{product.description}</p>
                 <p className="font-semibold text-gray-600 text-lg">
                   $ {product.price_min} - {product.price_max}
                 </p>

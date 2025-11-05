@@ -3,10 +3,12 @@ import React, { use } from "react";
 import { ArrowLeft } from "lucide-react";
 import { AuthContext } from "../Provider/AuthProvider";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { useNavigate } from "react-router";
 
 const CreateProduct = () => {
   const { user } = use(AuthContext);
   const axiosInstanceSecure = useAxiosSecure()
+  const navigate = useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -34,6 +36,7 @@ const CreateProduct = () => {
     axiosInstanceSecure.post("/products", formData)
     .then((data) => {
       if (data.data.insertedId) {
+        navigate('/')
         return alert("product created successfully");
       }
     });
