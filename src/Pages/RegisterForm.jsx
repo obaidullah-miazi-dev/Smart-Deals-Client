@@ -3,9 +3,10 @@ import { use } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import useAxios from "../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 export default function RegisterForm() {
-  const { googleLogIn, createUser,setLoading } = use(AuthContext);
+  const { googleLogIn, createUser, setLoading } = use(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const axiosInstance = useAxios();
@@ -16,14 +17,26 @@ export default function RegisterForm() {
     const password = e.target.password.value;
     createUser(email, password)
       .then((data) => {
-        alert('Account Created Successfully')
-      navigate('/login')
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Account Created Successfully",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        navigate("/login");
       })
       .catch((error) => {
         const errorCode = error.code;
-        alert(errorCode);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: {errorCode},
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
-      setLoading(false)
+    setLoading(false);
   };
 
   const handleGoogleSignUp = () => {
@@ -31,18 +44,24 @@ export default function RegisterForm() {
       .then((res) => {
         // console.log(res.user)
 
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Logged In successfully",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+
         const newUser = {
           name: res.user.displayName,
           email: res.user.email,
           image: res.user.photoURL,
         };
         // create user in database
-        axiosInstance
-          .post("/users", newUser)
-          .then((data) => {
-            // console.log(data);
-            navigate(`${location.state ? location.state : "/"}`);
-          });
+        axiosInstance.post("/users", newUser).then((data) => {
+          // console.log(data);
+          navigate(`${location.state ? location.state : "/"}`);
+        });
       })
       .catch((err) => {
         console.log(err);

@@ -3,6 +3,7 @@ import { use } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import useAxios from "../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 export default function LoginForm() {
   const { googleLogIn, setLoading, signInUser } = use(AuthContext);
@@ -16,12 +17,24 @@ export default function LoginForm() {
     const password = e.target.password.value;
     signInUser(email, password)
       .then((data) => {
-        alert("Login Successfull");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Logged In Successfully",
+          showConfirmButton: false,
+          timer: 2000,
+        });
         navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
-        alert(errorCode);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: {errorCode},
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
     setLoading(false);
   };
@@ -30,19 +43,25 @@ export default function LoginForm() {
     googleLogIn()
       .then((res) => {
         // console.log(res.user)
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Logged In Successfully",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+
         const newUser = {
           name: res.user.displayName,
           email: res.user.email,
           image: res.user.photoURL,
         };
         // create user in database
-        axiosInstance
-          .post("/users", newUser)
-          .then((data) => {
-            // console.log(data);
-            // console.log(location.state);
-            navigate(`${location.state ? location.state : "/"}`);
-          });
+        axiosInstance.post("/users", newUser).then((data) => {
+          // console.log(data);
+          // console.log(location.state);
+          navigate(`${location.state ? location.state : "/"}`);
+        });
       })
       .catch((err) => {
         console.log(err);

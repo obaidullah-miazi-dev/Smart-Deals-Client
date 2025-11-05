@@ -3,19 +3,19 @@ import { AuthContext } from "../Provider/AuthProvider";
 import Container from "../components/Container";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useAxios from "../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const MyBids = () => {
   const { user } = use(AuthContext);
   const [myBids, setMyBids] = useState([]);
   const axiosInstanceSecure = useAxiosSecure();
-  const axiosInstance = useAxios()
+  const axiosInstance = useAxios();
 
-  useEffect(()=>{
-    axiosInstanceSecure.get(`bids?email=${user.email}`)
-    .then(data=>{
-      setMyBids(data.data)
-    })
-  },[user,axiosInstanceSecure])
+  useEffect(() => {
+    axiosInstanceSecure.get(`bids?email=${user.email}`).then((data) => {
+      setMyBids(data.data);
+    });
+  }, [user, axiosInstanceSecure]);
 
   // useEffect(() => {
   //   if (user?.email) {
@@ -33,8 +33,19 @@ const MyBids = () => {
   // }, [user]);
 
   const handleDeleteBid = (_id) => {
-    alert("are you sure to delete this bid");
-    axiosInstance.delete(`https://smart-deals-db-server.onrender.com/bids/${_id}`)
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        axiosInstance
+      .delete(`https://smart-deals-db-server.onrender.com/bids/${_id}`)
       .then((data) => {
         // console.log('after deleted',data);
         if (data.data.deletedCount) {
@@ -42,6 +53,18 @@ const MyBids = () => {
           setMyBids(remainingBids);
         }
       });
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Bid Deleted Successfully",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+    });
+
+    
   };
   return (
     <Container>

@@ -3,6 +3,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import Container from "../components/Container";
 import useAxios from "../Hooks/useAxios";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const MyProducts = () => {
   const { user } = use(AuthContext);
@@ -20,8 +21,18 @@ const MyProducts = () => {
   }, [user, axiosInstanceSecure]);
 
   const handleDeleteproducts = (_id) => {
-    alert("are you sure to delete this products");
-    axiosInstance.delete(`/products/${_id}`).then((data) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        axiosInstance.delete(`/products/${_id}`).then((data) => {
       // console.log('after deleted',data);
       if (data.data.deletedCount) {
         const remainingproductss = myProducts.filter(
@@ -30,6 +41,17 @@ const MyProducts = () => {
         setMyProducts(remainingproductss);
       }
     });
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Product deleted successfully",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+    });
+    
   };
   return (
     <Container>
