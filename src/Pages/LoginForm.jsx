@@ -1,13 +1,31 @@
+/* eslint-disable no-unused-vars */
 import { use } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import useAxios from "../Hooks/useAxios";
 
 export default function LoginForm() {
-  const { googleLogIn, setLoading } = use(AuthContext);
+  const { googleLogIn, setLoading, signInUser } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  const axiosInstance = useAxios()
+  const axiosInstance = useAxios();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    signInUser(email, password)
+      .then((data) => {
+        alert("Login Successfull");
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        alert(errorCode);
+      });
+    setLoading(false);
+  };
+
   const handleGoogleSignIn = () => {
     googleLogIn()
       .then((res) => {
@@ -18,7 +36,8 @@ export default function LoginForm() {
           image: res.user.photoURL,
         };
         // create user in database
-        axiosInstance.post("/users", newUser)
+        axiosInstance
+          .post("/users", newUser)
           // eslint-disable-next-line no-unused-vars
           .then((data) => {
             // console.log(data);
@@ -47,7 +66,7 @@ export default function LoginForm() {
           </Link>
         </p>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleLogin}>
           {/* Email */}
           <div>
             <label

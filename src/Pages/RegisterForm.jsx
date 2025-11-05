@@ -17,13 +17,13 @@ export default function RegisterForm() {
     createUser(email, password)
       .then((data) => {
         alert('Account Created Successfully')
+      navigate('/login')
       })
       .catch((error) => {
         const errorCode = error.code;
         alert(errorCode);
       });
       setLoading(false)
-      navigate('/login')
   };
 
   const handleGoogleSignUp = () => {
@@ -39,7 +39,6 @@ export default function RegisterForm() {
         // create user in database
         axiosInstance
           .post("/users", newUser)
-          // eslint-disable-next-line no-unused-vars
           .then((data) => {
             // console.log(data);
             navigate(`${location.state ? location.state : "/"}`);
