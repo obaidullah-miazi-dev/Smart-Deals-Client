@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Container from "../components/Container";

@@ -17,18 +17,20 @@ const AllProducts = () => {
           {products.map((product) => (
             <div
               key={product._id}
-              className="shadow-md rounded-md p-4 space-y-4 h-full"
+              className="shadow-md rounded-md p-4 space-y-4 h-full flex flex-col justify-between gap-5"
             >
-              <img
-                className="w-full h-[270px] bg-base-200 rounded-md"
-                src={product.image}
-                alt={product.title}
-              />
-              <h2 className="text-2xl font-bold">{product.title}</h2>
-              <p className="text-gray-500 h-12">{product.description}</p>
-              <p className="font-semibold text-gray-600 text-lg">
-                $ {product.price_min} - {product.price_max}
-              </p>
+              <div className="space-y-3">
+                <img
+                  className="w-full h-[270px] bg-base-200 rounded-md"
+                  src={product.image}
+                  alt={product.title}
+                />
+                <h2 className="text-2xl font-bold">{product.title}</h2>
+                <p className="text-gray-500 h-auto">{product.description}</p>
+                <p className="font-semibold text-gray-600 text-lg">
+                  $ {product.price_min} - {product.price_max}
+                </p>
+              </div>
               <Link to={`/productDetails/${product._id}`}>
                 <button className="btn bg-gradient text-white w-full hover-eff rounded-md">
                   View Details
