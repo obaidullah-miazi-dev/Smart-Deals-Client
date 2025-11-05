@@ -1,35 +1,44 @@
+/* eslint-disable no-unused-vars */
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Container from "../components/Container";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useAxios from "../Hooks/useAxios";
 
 const MyBids = () => {
   const { user } = use(AuthContext);
   const [myBids, setMyBids] = useState([]);
+  const axiosInstanceSecure = useAxiosSecure();
+  const axiosInstance = useAxios()
 
-  useEffect(() => {
-    if (user?.email) {
-      fetch(`https://smart-deals-db-server.onrender.com/bids?email=${user.email}`,{
-        headers:{
-          authorization: `Bearer ${user.accessToken}`
-        }
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
-          setMyBids(data);
-        });
-    }
-  }, [user]);
+  useEffect(()=>{
+    axiosInstanceSecure.get(`bids?email=${user.email}`)
+    .then(data=>{
+      setMyBids(data.data)
+    })
+  },[user,axiosInstanceSecure])
+
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`https://smart-deals-db-server.onrender.com/bids?email=${user.email}`,{
+  //       headers:{
+  //         authorization: `Bearer ${user.accessToken}`
+  //       }
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         // console.log(data);
+  //         setMyBids(data);
+  //       });
+  //   }
+  // }, [user]);
 
   const handleDeleteBid = (_id) => {
     alert("are you sure to delete this bid");
-    fetch(`https://smart-deals-db-server.onrender.com/bids/${_id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
+    axiosInstance.delete(`https://smart-deals-db-server.onrender.com/bids/${_id}`)
       .then((data) => {
         // console.log('after deleted',data);
-        if (data.deletedCount) {
+        if (data.data.deletedCount) {
           const remainingBids = myBids.filter((bids) => bids._id !== _id);
           setMyBids(remainingBids);
         }

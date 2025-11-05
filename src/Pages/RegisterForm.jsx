@@ -1,11 +1,13 @@
 import { use } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
+import useAxios from "../Hooks/useAxios";
 
 export default function RegisterForm() {
   const { googleLogIn } = use(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosInstance = useAxios()
 
   const handleGoogleSignUp = () => {
     googleLogIn()
@@ -18,14 +20,7 @@ export default function RegisterForm() {
           image: res.user.photoURL,
         };
         // create user in database
-        fetch("https://smart-deals-db-server.onrender.com/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(newUser),
-        })
-          .then((res) => res.json())
+        axiosInstance.post("/users",newUser)
           // eslint-disable-next-line no-unused-vars
           .then((data) => {
             // console.log(data);

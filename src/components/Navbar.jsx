@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { use, useState } from 'react';
 import Container from './Container';
 import { Link, NavLink } from 'react-router';
@@ -11,7 +12,7 @@ const Navbar = () => {
     const handleLogOut = () => {
         logOut()
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 alert('loged out successfully')
             })
             .catch(err => {

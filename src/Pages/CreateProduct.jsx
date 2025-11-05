@@ -2,10 +2,11 @@
 import React, { use } from "react";
 import { ArrowLeft } from "lucide-react";
 import { AuthContext } from "../Provider/AuthProvider";
-import axios from "axios";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const CreateProduct = () => {
   const { user } = use(AuthContext);
+  const axiosInstanceSecure = useAxiosSecure()
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -18,8 +19,8 @@ const CreateProduct = () => {
       condition: e.target.condition.value,
       usage: e.target.usageTime.value,
       image: e.target.productImageUrl.value,
-      seller_name: e.target.sellerName.value,
-      sellerEmail: e.target.sellerEmail.value,
+      seller_name: e.target.name.value,
+      sellerEmail: e.target.email.value,
       seller_contact: e.target.sellerContact.value,
       seller_image: e.target.sellerImageUrl.value,
       location: e.target.location.value,
@@ -30,13 +31,12 @@ const CreateProduct = () => {
     };
 
     // Send to API
-    axios
-      .post("https://smart-deals-db-server.onrender.com/products", formData)
-      .then((data) => {
-        if (data.data.insertedId) {
-          return alert("product created successfully");
-        }
-      });
+    axiosInstanceSecure.post("/products", formData)
+    .then((data) => {
+      if (data.data.insertedId) {
+        return alert("product created successfully");
+      }
+    });
   };
 
   return (

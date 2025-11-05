@@ -3,19 +3,21 @@ import Banner from "../components/Banner";
 import Container from "../components/Container";
 import RecentProducts from "../components/RecentProducts";
 import FancyLoader from "../components/FancyLoader";
+import useAxios from "../Hooks/useAxios";
 
 const Home = () => {
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const axiosInstance = useAxios()
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(
-          "https://smart-deals-db-server.onrender.com/latestProducts"
+        const res = await axiosInstance(
+          "/latestProducts"
         );
-        const data = await res.json();
-        setProducts(data);
+        setProducts(res.data);
+        // console.log(res);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -24,11 +26,11 @@ const Home = () => {
     };
 
     fetchData();
-  }, []);
+  }, [axiosInstance]);
   // console.log(products);
 
   if (loading) return <FancyLoader></FancyLoader>;
-  if (error) return alert(error);
+  if (error) return console.log(error);
 
   return (
     <div>

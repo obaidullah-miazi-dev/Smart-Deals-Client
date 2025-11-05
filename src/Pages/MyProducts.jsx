@@ -1,39 +1,35 @@
 import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Container from "../components/Container";
+import useAxios from "../Hooks/useAxios";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const MyProducts = () => {
   const { user } = use(AuthContext);
   const [myProducts, setMyProducts] = useState([]);
+  const axiosInstance = useAxios();
+  const axiosInstanceSecure = useAxiosSecure();
 
   useEffect(() => {
     if (user?.email) {
-      fetch(
-        `https://smart-deals-db-server.onrender.com/products?email=${user.email}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
-          setMyProducts(data);
-        });
+      axiosInstanceSecure.get(`/products?email=${user?.email}`).then((data) => {
+        // console.log(data.data);
+        setMyProducts(data.data);
+      });
     }
-  }, [user?.email]);
+  }, [user, axiosInstanceSecure]);
 
   const handleDeleteproducts = (_id) => {
     alert("are you sure to delete this products");
-    fetch(`https://smart-deals-db-server.onrender.com/products/${_id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log('after deleted',data);
-        if (data.deletedCount) {
-          const remainingproductss = myProducts.filter(
-            (products) => products._id !== _id
-          );
-          setMyProducts(remainingproductss);
-        }
-      });
+    axiosInstance.delete(`/products/${_id}`).then((data) => {
+      // console.log('after deleted',data);
+      if (data.data.deletedCount) {
+        const remainingproductss = myProducts.filter(
+          (products) => products._id !== _id
+        );
+        setMyProducts(remainingproductss);
+      }
+    });
   };
   return (
     <Container>

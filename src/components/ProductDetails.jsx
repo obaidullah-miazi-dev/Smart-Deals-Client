@@ -3,13 +3,14 @@ import React, { use, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, MessageCircle, MapPin, Calendar, CheckCircle } from 'lucide-react';
 import { Link, useLoaderData } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
-import axios from 'axios';
+import useAxios from '../Hooks/useAxios';
 
 const ProductDetails = () => {
     const product = useLoaderData()
     const { user } = use(AuthContext)
     const modalbox = useRef(null)
     const [bids, setBids] = useState([])
+    const axiosInstance = useAxios()
     // console.log(product);
     const { image, category, condition, created_at, description, email, location, price_max, price_min, seller_contact, seller_image, seller_name, status, title, usage, _id } = product
 
@@ -34,19 +35,12 @@ const ProductDetails = () => {
         }
         const newBid = { buyerName, buyerEmail, buyerImageUrl, offeredPrice, contactInfo, productId: _id,image,title,seller_image,seller_name,price_max,price_min,email }
         // console.log(newBid);
-        fetch('https://smart-deals-db-server.onrender.com/bids', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newBid)
-        })
-            .then(res => res.json())
+        axiosInstance.post('/bids', newBid)
             .then(data => {
                 // console.log('after placing bids', data);
-                if (data.insertedId) {
+                if (data.data.insertedId) {
                     alert('bids placed successfully')
-                    newBid._id= data.insertedId
+                    newBid._id= data.data.insertedId
                     const newBids = [...bids,newBid]
                     newBids.sort((a,b)=> b.offeredPrice - a.offeredPrice)
                     setBids(newBids)
@@ -58,12 +52,12 @@ const ProductDetails = () => {
     }
 
     useEffect(() => {
-        axios(`https://smart-deals-db-server.onrender.com/products/bids/${_id}`)
+        axiosInstance(`/products/bids/${_id}`)
             .then(data => {
                 // console.log('bids collection for this product', data);
                 setBids(data.data)
             })
-    }, [_id])
+    }, [_id,axiosInstance])
 
     return (
         <div className="min-h-screen bg-gray-50 py-8 px-4">
