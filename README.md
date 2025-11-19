@@ -83,7 +83,7 @@ This project demonstrates CRUD operations clearly:
 
 ---
 
-### ⚙️ How to Run This Project Locally
+## ⚙️ How to Run This Project Locally
 
 Follow the steps below to set up both the client and server of Smart Deals Shop on your local machine.
 
@@ -168,10 +168,14 @@ Backend: http://localhost:5000
 
 You can now test features such as product posting, bidding, authentication, and dashboard views.
 
-📌 Author
-Obaidullah Miazi
-MERN Stack Developer
-Motivated to build useful digital products
+📌 Author  
+
+Obaidullah Miazi  
+
+MERN Stack Developer  
+
+Motivated to build useful digital products  
+
 
 Email: obaidullahmiazi.dev@gmail.com
 
